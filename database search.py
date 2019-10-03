@@ -23,12 +23,6 @@ def create_connection(db_file):
  
  
 def select_task_by_priority(conn,L,A,B):
-    """
-    Query tasks by priority
-    :param conn: the Connection object
-    :param priority:
-    :return:
-    """
     
     cur = conn.cursor()
     cur.execute("SELECT Partnumber,Colorname,L,A,B FROM reading ")
@@ -39,7 +33,10 @@ def select_task_by_priority(conn,L,A,B):
         if(delta_e_cie1976(color1, color2)<3):
             print(row[0]," ",row[1])
 
-def getcolor(conn,L,A,B):
+def getcolor():
+    L=light.get()
+    A=red.get()
+    B=blue.get()
     messagebox.showinfo("Title", L+A+B)
     #L=DoubleVar(L)
     #A=DoubleVar(A)
@@ -58,7 +55,7 @@ def main():
     L.grid(row = 1, column = 0, padx = 0, pady = 10)
     light = Entry(root)
     light.grid(row = 1, column = 1, padx = 0, pady = 10)
-    L=45
+  
         
 
         
@@ -66,18 +63,18 @@ def main():
     A.grid(row = 2, column = 0, padx = 0, pady = 10)
     red = Entry(root)
     red.grid(row = 2, column = 1, padx = 0, pady = 10)
-    A=red.get()
+    
       
     
     B = Label(root, text = "Enter your B reading: ")
     B.grid(row = 3, column = 0, padx = 0, pady = 10)
     blue = Entry(root)
     blue.grid(row = 3, column = 1, padx = 0, pady = 10)
-    B=blue.get()
+ 
        
         
         #select_task_by_priority=partial(conn,L,A,B)
-    sbmitbtn = Button(root, text = "Submit",command=lambda: getcolor(conn,L,A,B))
+    sbmitbtn = Button(root, text = "Submit",command=getcolor)
     sbmitbtn.grid(row = 4, column = 0, padx = 0, pady = 10)
        
  
